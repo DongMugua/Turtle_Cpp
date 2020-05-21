@@ -49,4 +49,5 @@ public:
   double statusCommand(std::string );
 
   bool condition(double, std::string, double);
+  PileL* getList ();
 };

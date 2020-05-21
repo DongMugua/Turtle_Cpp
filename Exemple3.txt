@@ -1,0 +1,51 @@
+clear
+color blue
+width 5
+tourner 18
+avancer 50
+tourner 144
+avancer 50
+tourner 288 
+avancer 50
+tourner 144
+avancer 50
+tourner 288 
+avancer 50
+tourner 144
+avancer 50
+tourner 288 
+avancer 50
+tourner 144
+avancer 50
+tourner 288 
+avancer 50
+tourner 144
+avancer 50
+tourner 288 
+avancer 50
+tourner 18
+lever
+position 0 -100
+laisser
+color red
+tourner 342
+avancer 50
+tourner 144
+avancer 50
+tourner 288 
+avancer 50
+tourner 144
+avancer 50
+tourner 288 
+avancer 50
+tourner 144
+avancer 50
+tourner 288 
+avancer 50
+tourner 144
+avancer 50
+tourner 288 
+avancer 50
+tourner 144
+avancer 50
+cacher

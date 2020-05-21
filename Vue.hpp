@@ -2,7 +2,11 @@
 * This file is part of Turtle.
 *
 * Copyright (C) 2018 SUN Hao, WU Mengxin, LIU Bohua Université Polythec Nice Sophia 
+*
+* Cette classe est pour créer une interface graphique et pour ajouter les 
+* buttons, les menus etc dans cette interface.
 */
+
 #pragma once
 
 #include <iostream>

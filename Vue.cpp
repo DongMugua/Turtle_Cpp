@@ -3,11 +3,19 @@
 *
 * Copyright (C) 2018 SUN Hao, WU Mengxin, LIU Bohua Université Polythec Nice Sophia 
 */
+
 #include "Vue.hpp"
 #include "Controleur.hpp"
 #include "Robot.hpp"
 #include "gtkmm.h"
+
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+
 #define PI 3.1415926535
+
 
 Vue::Vue():
   box1(Gtk::ORIENTATION_HORIZONTAL),
@@ -39,6 +47,8 @@ Vue::Vue():
   box2.pack_start(lAffiche);
   add(box2);
   show_all_children();
+  
+  // Ces fonctions sont pour fonctionner les buttons de menu.
   myMenu.a_1.signal_activate().connect(sigc::mem_fun(this, &Vue::menu_a1_message));
   myMenu.d_1.signal_activate().connect(sigc::mem_fun(this, &Vue::menu_d1_message));
   myMenu.a_3.signal_activate().connect(sigc::mem_fun(this, &Vue::menu_a3_message));
@@ -46,26 +56,32 @@ Vue::Vue():
   bDiaCancel.signal_clicked() .connect(sigc::mem_fun(this, &Vue::on_button_diaClose));
 }
 
+// Cette fonction est pour fermer la window.
 void Vue::on_button_close() { hide(); }
 
+// Cette fonction est pour fermer la dialogue.
 void Vue::on_button_diaClose() {dia.hide();}
 
+// Cette fonction est pour obtenir le text dans l'entry.
 std::string Vue::getCommand() const {
   Glib::ustring text = entry.get_text();
   return text.c_str();
 }
 
+// Cette fonction est pour obtenir les text dans l'entry .
 std::string Vue::getDialogCommand() {
   Glib::ustring text = entryDia.get_text();
   dia.hide();
   return text.c_str();
 }
 
+// Cette fonction est pour obtenir les multi-command.
 std::string Vue::getDialogText() {
   Glib::ustring text = buffer->get_text(true);
   return text.c_str();
 }
 
+// Cette fonction est pour changer la text dans les lables.
 void Vue::changeText(PileL *info){
   Robot x = info->sommet();
   Glib::ustring px = Glib::ustring::format(std::fixed, std::setprecision(1), x.getX());
@@ -87,12 +103,14 @@ void Vue::changeText(PileL *info){
   lAffiche.set_text(info->getExp());
 }
 
+// Cette fonction est pour mettre à jour la zone de dessin.
 void Vue::update (PileL *info) {
   myArea.update(info);
   myArea.queue_draw();
   changeText(info);
 }
 
+// Ces deux fonctions est deux écouteurs pour réserver le signal de cliquer.
 void Vue::addExitListener(Controleur *c) {
   bExit.signal_clicked().connect(sigc::mem_fun(*c, &Controleur::on_button_exit));
   myMenu.c_1.signal_activate().connect(sigc::mem_fun(*c, &Controleur::on_button_exit));
@@ -102,6 +120,7 @@ void Vue::addCommandListener(Controleur *c) {
   bOK.signal_clicked().connect(sigc::mem_fun(*c, &Controleur::on_button_command));
 }
 
+// Ces 6 écouteurs est pour écouter le cliquer en menu.
 void Vue::menu_a1_message() {
   Gtk::Dialog dia("Please write a text :", this);
   dia.remove();
@@ -138,19 +157,34 @@ void Vue::menu_b2_Listener(Controleur *c){
   myMenu.b_2.signal_activate().connect(sigc::mem_fun(*c,&Controleur::on_menu_clear));
 }
 
+// Ces deux fonction est pour ajouter deux dialogue de fichiers.
 void Vue::menu_a3_message() {
-  Gtk::MessageDialog dialog(*this, "Command Guide",false , Gtk::MESSAGE_QUESTION);
-  dialog.set_secondary_text("COMMAND....");
-  dialog.set_size_request(WIDTH,HEIGHT);
+  std::ifstream ifile("aide1.txt");
+  std::ostringstream buf;
+  char ch;
+  while(buf&&ifile.get(ch))
+    buf.put(ch);
+  std::string s= buf.str();
+  Gtk::MessageDialog dialog(*this, "Fonctions simples",false , Gtk::MESSAGE_QUESTION);
+  dialog.set_secondary_text(s);
+  dialog.set_size_request(800,500);
   dialog.run();
 }
 
 void Vue::menu_b3_message(){
-  Gtk::MessageDialog dialog(*this, "Programmable robot", false , Gtk::MESSAGE_QUESTION);
-  dialog.set_secondary_text(" Programmable.....");
+  std::ifstream ifile("aide2.txt");
+  std::ostringstream buf;
+  char ch;
+  while(buf&&ifile.get(ch))
+    buf.put(ch);
+  std::string s= buf.str();
+  Gtk::MessageDialog dialog(*this, "Fonctions complexes et fichier", false , Gtk::MESSAGE_QUESTION);
+  dialog.set_secondary_text(s);
+  dialog.set_size_request(800,500);
   dialog.run();
 }
 
+// Cette fonction est pour créer la dialogue de nouveux fichier.
 void Vue::menu_d1_message() {
   Gtk::Box *box_ = dia.get_content_area();
   dia.remove();
@@ -163,11 +197,17 @@ void Vue::menu_d1_message() {
   dia.run();
 }
 
+// Cette fontion est pour lire le fichier.
 void Vue::readFileListener(Controleur *c) {
+
+  
   bDiaOK.signal_clicked().connect(sigc::mem_fun(*c, &Controleur::on_read_file));
 }
+
+// Cette fonction est pour fonctionner le fichier.
 void Vue::runFileListener(Controleur *c) {
   bDiaRun.signal_clicked().connect(sigc::mem_fun(*c, &Controleur::on_run_file));
 }
 
+// Déstructeur.
 Vue::~Vue(){}

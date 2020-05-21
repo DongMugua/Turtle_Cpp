@@ -2,8 +2,10 @@
 * This file is part of Turtle.
 *
 * Copyright (C) 2018 SUN Hao, WU Mengxin, LIU Bohua Université Polythec Nice Sophia 
+*
+* Définition d'une classe MyMenu qui créer un menu et connecter les fonction
+* selon les buttons.
 */
-
 
 #pragma once
 
@@ -59,9 +61,9 @@ public:
     subMenu_1.append(separeLine2);
     subMenu_1.append(c_1);
 
-    b_1_1.set_label("File_1");
-    b_1_2.set_label("File_1");
-    b_1_3.set_label("File_1");   
+    b_1_1.set_label("Exemple1");
+    b_1_2.set_label("Exemple2");
+    b_1_3.set_label("Exemple3");   
     b_1.set_submenu(subMenu_1_b);
     
     subMenu_1_b.append(b_1_1);
@@ -77,8 +79,8 @@ public:
     subMenu_2.append(separeLine3);
     subMenu_2.append(b_2);
 
-    a_3.set_label("About the command");
-    b_3.set_label("About the programmable robot");  
+    a_3.set_label("Fonction simple");
+    b_3.set_label("Fonction complexe et fichier");  
     subMenu_3.append(a_3);
     subMenu_3.append(separeLine4);
     subMenu_3.append(b_3);

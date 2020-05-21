@@ -1,0 +1,162 @@
+clear
+lever
+position -56 32
+tourner -100
+laisser
+avancer 116
+tourner 90
+avancer 8
+tourner -90
+avancer 5
+tourner -90
+avancer 8
+tourner 45
+avancer 55
+tourner 45
+avancer 10
+angle 210
+avancer 15
+angle 170
+avancer 116
+tourner -45
+avancer 15
+tourner 90
+avancer 15
+angle 160
+avancer 50
+tourner -45
+avancer 15
+tourner -125
+avancer 10
+position -60 32
+tourner 110
+avancer 10
+tourner 100
+avancer 5
+position -56 32
+lever
+position -90.5 -2.4
+angle -90
+laisser
+avancer 17
+angle -20
+avancer 50
+angle 15
+avancer 10
+tourner -60
+avancer 10
+angle -10
+avancer 120
+angle 90
+avancer 17
+lever
+position -90.5 -19.4
+tourner 135
+laisser
+avancer 20
+tourner -85
+avancer 10
+tourner 155
+avancer 20
+angle -15
+avancer 60
+angle 30
+avancer 8
+tourner -90
+avancer 9
+angle -10
+avancer 150
+tourner 135
+avancer 40
+lever
+position -99.5 -48
+laisser
+angle 90
+reculer 35
+angle 180
+tourner -8
+avancer 20
+tourner 45
+avancer 40
+angle 270
+lever
+position -99.5 -83
+angle -8
+laisser
+avancer 200
+angle 90
+avancer 23
+position 98.6 -110.8
+angle -8
+avancer 30
+position 128.2 -144.3
+lever
+angle 180
+avancer 10
+angle 90
+laisser
+avancer 23
+angle 172
+avancer 230
+avancer 8
+tourner 45
+avancer 40
+lever
+position -117.5 -88.2
+laisser
+angle 270
+avancer 50
+lever
+position -250 -144.3
+laisser
+angle 0
+width 3
+avancer 500
+lever
+position 100 -144.3
+width 9
+laisser
+angle 90
+avancer 13
+lever
+position 70 -144.3
+width 10
+laisser
+avancer 15
+lever
+position 40 -144.3
+width 11
+laisser
+avancer 17
+lever
+position 0 -144.3
+width 12
+laisser
+avancer 21
+lever
+position -40 -144.3
+width 13
+laisser
+avancer 22
+lever
+position -80 -144.3
+width 14
+laisser
+avancer 24
+lever
+position -151.3 -144.3
+width 1
+angle 90
+laisser
+avancer 40
+lever
+position -60 32
+reculer 10
+laisser
+tourner -50
+reculer 30
+angle -20
+avancer 30
+tourner 125
+avancer 30
+cacher

@@ -2,6 +2,9 @@
 * This file is part of Turtle.
 *
 * Copyright (C) 2018 SUN Hao, WU Mengxin, LIU Bohua Université Polythec Nice Sophia 
+*
+* Définition d'une classe Robot qui contient les status courant 
+* du robot.
 */
 
 
@@ -25,7 +28,7 @@ private:
   double color_G;
   double color_B;
 public:
-
+  // constructeur
   Robot(double x_=0, double y_=0,bool premierPoint = false):
     x(x_), y(y_) {
     if (premierPoint==true) {
@@ -40,7 +43,7 @@ public:
       this->robotStatus=true;
     }
   }
-  
+
   Robot (const Robot &r,bool t){
     if(t){
       this->x=r.x;

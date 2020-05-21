@@ -1,4 +1,0 @@
-clear
-avancer 30
-position 200 200
-si x > 100 alors color blue

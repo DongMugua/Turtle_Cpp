@@ -1,0 +1,25 @@
+Parametres : 
+	-x 				la variable associee a la position horizontale 
+					(valeur initiale = 0)
+	-y 				la variable associee a la position verticale   
+					(valeur initiale = 0)
+	-angle			la variable associee a l'angle (valeur initiale = 90)
+Comparateur : 
+	-<				inferieur strict
+	->				superieur strict
+	-=				egale
+	-<=				inferieur ou egale
+	->=				superieur ou egale
+	-!=				different
+
+Fonctions complexes:
+					[condition] = [parametre] [comparateur] [nombre]
+	-si [condition] alors [fct_simple]
+					effectue [fct_simple] si [condition] est vrai
+	-tantque [condition] faire [fct_simple]
+					effectue [fct_simple] tant que [condition] est faux
+	-repeter [fct_simple] [nombre] fois
+					effectue [fct_simple] [nombre] fois
+
+Fichiers : 
+	La lecture de fichier se fait ligne a ligne. Il ne faut pas plus d'une fonction par ligne. Une fois le fichier écrit il peut etre lancer depuis le menu File->Open File puis en entrant dans la fenetre le nom du fichier ou le menu File->New File puis en écrivant le fichier directement.

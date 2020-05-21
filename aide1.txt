@@ -1,0 +1,32 @@
+﻿Fonctions simples :
+	-avancer [nombre] 		
+		fait avancer le robot de [nombre] pixels
+	-reculer [nombre]		
+		fait reculer le robot de [nombre] pixels
+	-angle [nombre]			
+		dirige le robot vers l'angle [nombre] degres 
+	-tourner [nombre]			
+		fait tourner le robot de [nombre] degres (angle)
+	-color [nom]			
+		fait passer le robot et le stylo de la couleur [color_nom]
+		[color_nom] : [red, blue, green, black, white, yellow, violet,
+		 orange, pink]
+	-rgb [nombre] [nombre] [nombre]	
+		[nombre] compris entre 0 et 1, permet d'utiliser 
+		autre que celle pre-definies dans la fonction color
+	-position [nombreX] [nombreY] 	
+		positionne le robot à la position (x,y). 
+	-width [nombre]			
+		regle la largeur du trace
+	-lever 				
+		leve le stylo, arrete le trace
+	-laisser 			
+		baisse le stylo, commence le trace (position par defaut)
+	-undo 				
+		annule la derniere instruction
+	-clear 				
+		nettoie la zone de dessin
+	-cacher				
+		rend le robot invisible
+	-afficher 			
+		fait reapparaitre le robot

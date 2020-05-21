@@ -2,8 +2,10 @@
 * This file is part of Turtle.
 *
 * Copyright (C) 2018 SUN Hao, WU Mengxin, LIU Bohua Université Polythec Nice Sophia 
+*
+* La fonction de modèle est pour controler le robot.
+*
 */
-
 
 #include <cmath>
 #include <algorithm>
@@ -17,6 +19,7 @@
 #define WIDTH 600
 #define HEIGHT 600
 
+// Cette fonction est pour vérifier si la chaine de caractère est un nombre
 bool Modele::verifier(std::vector<std::string> &v) {
   try{
     if (v.size()<2) {
@@ -31,6 +34,7 @@ bool Modele::verifier(std::vector<std::string> &v) {
   std::vector<std::string>::iterator it=v.begin();
   for (it=v.begin()+1;it<v.end();it++) {
     try{
+      // Pour vérifier le caractère est nombre, point, plus oumoins.
       if( std::find_if(it->begin(),it->end(), [] (int x) { return  (x<48 || x>57) && x!=45 && x!=43 && x!=46; }) != it->end()) {
 	throw CommandError(); 
 	//return false;
@@ -46,7 +50,7 @@ bool Modele::verifier(std::vector<std::string> &v) {
 }
 
 
-
+// Cette fonction est pour séparer le chaîne de caractères par espace.
 std::vector<std::string> Modele::split(std::string &str) {
   std::vector<std::string> res;
   char *cstr = new char[str.length()+1];
@@ -61,6 +65,7 @@ std::vector<std::string> Modele::split(std::string &str) {
   return res;
 }
 
+// C'est pour distinguer la opération.
 bool Modele::condition(double c1, std::string condition, double nom) {
   try {
     if(condition==">")
@@ -83,30 +88,33 @@ bool Modele::condition(double c1, std::string condition, double nom) {
   }
 }
 
+// Cette fonction est pour faire le robot avancer.
 void Modele::avancer(std::string s) {
-  Robot * robot = new Robot(robot_list->sommet(),true);
+  Robot * robot = new Robot(robot_list->sommet(),true); // Créer un robot qui est égale à le sommet de pile.
   double x = robot_list->sommet().getX();
   double y = robot_list->sommet().getY();
   double angle = robot_list->sommet().getAngle();
   double dst = atof(s.c_str());
   robot->setX(x+dst*cos(angle));
-  robot->setY( y+dst*sin(angle));
+  robot->setY(y+dst*sin(angle));
   robot_list->empiler(robot);
   delete robot;
 }
 
+// Cette fonction est pour faire le robot reculer.
 void Modele::reculer(std::string s) {
   Robot * robot = new Robot(robot_list->sommet(),true);
   double x = robot_list->sommet().getX();
   double y = robot_list->sommet().getY();
   double angle = robot_list->sommet().getAngle();
   double dst = atof(s.c_str());
-  robot->setX(abs(x-dst*cos(angle))<1e-10 ? 0 : x-dst*cos(angle));
-  robot->setY(abs(y-dst*sin(angle))<1e-10 ? 0 : y-dst*sin(angle));
+  robot->setX(x-dst*cos(angle));
+  robot->setY(y-dst*sin(angle));
   robot_list->empiler(robot);
   delete robot;
 }
 
+// Cette fonction est pour changer l'angle.
 void Modele::angleRegler(std::string s) {
   Robot * robot = new Robot(robot_list->sommet(),true);
   double des = atof(s.c_str());
@@ -115,6 +123,7 @@ void Modele::angleRegler(std::string s) {
   delete robot;
 }
 
+// Cette fonction est pour positionner la robot.
 void Modele::position(std::string x, std::string y){
   Robot *robot = new Robot(robot_list->sommet(),true);
   double x_des = atof(x.c_str());
@@ -125,6 +134,7 @@ void Modele::position(std::string x, std::string y){
   delete robot;
 }
 
+// Cette fonction est pour lever le stylo.
 void Modele::lever() {
   Robot * robot = new Robot(robot_list->sommet(),true);
   robot->setStyloStatus(false);
@@ -132,6 +142,7 @@ void Modele::lever() {
   delete robot;
 }
 
+// Cette fonction est pour laisser le stylo.
 void Modele::laisser() {
   Robot * robot = new Robot(robot_list->sommet(),true);
   robot->setStyloStatus(true);
@@ -139,6 +150,7 @@ void Modele::laisser() {
   delete robot;
 }
 
+// Cette fonction est pour changer la largeur de stylo.
 void Modele::line_width(std::string s){
   Robot * robot = new Robot(robot_list->sommet(),true);
   double des = atof(s.c_str());
@@ -147,11 +159,13 @@ void Modele::line_width(std::string s){
   delete robot;
 }
 
+// Cette fonction est pour annuler l'étape précédente
 void Modele::undo() {
   if(robot_list->getList().size()>1)
     robot_list->depiler();
 }
 
+// Cette fonction est pour cacher le robot.
 void Modele::cacher() {
   Robot * robot = new Robot(robot_list->sommet(),true);
   robot->setRobotStatus(false);
@@ -159,6 +173,7 @@ void Modele::cacher() {
   delete robot;
 }
 
+// Cette fonction est pour affichier le robot.
 void Modele::afficher() {
   Robot * robot = new Robot(robot_list->sommet(),true);
   robot->setRobotStatus(true);
@@ -166,6 +181,7 @@ void Modele::afficher() {
   delete robot;
 }
 
+// Cette fonction est pour changer la couleur que nous avnos met.
 void Modele::colorSet(std::string s) {
   Robot * robot = new Robot(robot_list->sommet(),true);
   try{
@@ -199,6 +215,7 @@ void Modele::colorSet(std::string s) {
   delete robot;
 }
 
+// Cette fonction est pour changer la couleur à partir de RGB paramètre.
 void Modele::RGB(std::string r, std::string g, std::string b){
   Robot * robot = new Robot(robot_list->sommet(),true);
   double r_ = atof(r.c_str());
@@ -209,6 +226,7 @@ void Modele::RGB(std::string r, std::string g, std::string b){
   delete robot;
 }
 
+// Cette fonction est pour faire le robot tourner.
 void Modele::tourner(std::string a) {
   Robot * robot = new Robot(robot_list->sommet(),true);
   double des = atof(a.c_str());
@@ -218,12 +236,14 @@ void Modele::tourner(std::string a) {
   delete robot;
 }
 
+// Cette fonction est pour nettoyer tous les command.
 void Modele::clear() {
   int size = robot_list->getList().size();
   for(int i=0;i<size-1;i++)
     robot_list->depiler();
 }
 
+// Cette fonction est pour vérifier la variable.
 double Modele::statusCommand(std::string command) {
   try {
     if(command =="angle")
@@ -239,6 +259,7 @@ double Modele::statusCommand(std::string command) {
   }
 }
 
+// Cette fonction est pour vérifier et apeler choisir la command.
 void Modele::behavioralCommand(std::vector<std::string> &command) {
   try{
     if(command[0] == "avancer") {
@@ -285,10 +306,11 @@ void Modele::behavioralCommand(std::vector<std::string> &command) {
   }	
 }
 
-
+// Cette fonction est pour réaliser la command si...alors...
 void Modele::siCommand( std::vector<std::string> & command){
   std::vector<std::string> cmd;
-  auto alors=std::find(command.begin(),command.end(),"alors");
+  // trouver "alors" et enregistre la commande dans un vecteur.
+  auto alors=std::find(command.begin(),command.end(),"alors"); 
   try{
     if (alors!=command.end()) {
       alors = alors +1;
@@ -298,6 +320,7 @@ void Modele::siCommand( std::vector<std::string> & command){
       std::vector<std::string> nombre;
       nombre.push_back(command[2]);
       nombre.push_back(command[3]);
+      // la réalisation de si..alors..
       if(verifier(nombre)) { 
 	if(condition(statusCommand(command[1]),command[2], atof(command[3].c_str())))
 	  behavioralCommand(cmd);
@@ -311,10 +334,11 @@ void Modele::siCommand( std::vector<std::string> & command){
   }
 }
 
-
+// Cette fonction est pour réaliser la command reprter ... n fois
 void Modele::repeterCommand(std::vector<std::string> &command) {
   std::vector<std::string> cmd;
   std::vector<std::string>::iterator it;
+  // trouver "fois" et enregistre la commande dans un vecteur.
   auto fois=std::find(command.begin(),command.end(),"fois");
   try{
     if(fois != command.end()) {
@@ -334,6 +358,7 @@ void Modele::repeterCommand(std::vector<std::string> &command) {
   }
 }
 
+// Cette fonction est pour réaliser la command tantque ... faire ...
 void Modele::tantqueCommand(std::vector<std::string> &command) {
   std::vector<std::string> cmd;
   auto faire=std::find(command.begin(),command.end(),"faire");
@@ -347,16 +372,20 @@ void Modele::tantqueCommand(std::vector<std::string> &command) {
       std::vector<std::string> nombre;
       nombre.push_back(command[2]);
       nombre.push_back(command[3]);
+      int i=0;
       if(verifier(nombre)) { 
 	while(condition(statusCommand(command[1]),command[2], atof(command[3].c_str()))) {
 	  if(abs(robot_list->sommet().getX()) <= WIDTH/2
-             && abs(robot_list->sommet().getY()) <= HEIGHT/2
-             && n<10000)
+	     && abs(robot_list->sommet().getY()) <= HEIGHT/2
+	     && i<10000) {
+	    i++;
 	    behavioralCommand(cmd);
-          else {
+	  }
+	  else {
+	    if(i>=10000)
+	      robot_list->setExp("Vous avez atteint le nombre maximal d'exécution de boucles: 1000");
 	    break;
-            n++;
-          }
+	  }
 	}
       }      
     } else {
@@ -368,6 +397,8 @@ void Modele::tantqueCommand(std::vector<std::string> &command) {
   }
 }
 
+// Cette fonction est pour analyser la premier mot de la commmand
+// afin de vérifier la propriété de la command.
 void Modele::analyseCommand(std::string &cmd) {
   std::transform(cmd.begin(),cmd.end(),cmd.begin(), [] (unsigned char c) {return std::tolower(c);});
   std::vector<std::string> commandVector = split(cmd);
@@ -383,6 +414,7 @@ void Modele::analyseCommand(std::string &cmd) {
   } 
 }
 
+// Cette fonction est pour lire un fichier.
 void Modele::readFile(std::string in) {
   std::string line;
   std::ifstream ios(in);
@@ -390,6 +422,7 @@ void Modele::readFile(std::string in) {
     if (!ios.is_open()) {
       throw FichierError();
     }
+    // lire la fichier ligne par ligne
     while (!ios.eof()) {
       getline(ios,line);
       set_command(line);
@@ -402,6 +435,8 @@ void Modele::readFile(std::string in) {
   }
 }
 
+// Cette fonction est pour créer un fichier que nous écrivons et pour
+// marcher ce fichier.
 void Modele::runFile(std::string text) {
   std::string out = "out.txt";
   std::ofstream oos(out);
@@ -409,6 +444,7 @@ void Modele::runFile(std::string text) {
     if (!oos.is_open()) {
       throw FichierError();
     }
+    // écrire tous les 
     for (std::string::iterator it = text.begin() ; it != text.end() ; it++)
       oos.put(*it);
     oos.close();
@@ -421,7 +457,9 @@ void Modele::runFile(std::string text) {
   }
 
 }
-
+ 
+// Cette fonction est pour fonctionner la fonction d'analyser et pour
+// empiler la pile
 void Modele::set_command(std::string command) {
   bool flag = false;
   if(command!="") {

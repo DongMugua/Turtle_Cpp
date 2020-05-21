@@ -2,8 +2,12 @@
 * This file is part of Turtle.
 *
 * Copyright (C) 2018 SUN Hao, WU Mengxin, LIU Bohua Université Polythec Nice Sophia 
+*
+* Définition d’une classe PileL. Les élé©ments sont conservés dans une
+* liste de type std::list<Robot>. Le sommet de pile est le premier
+* élément de la pile. 
+* 
 */
-
 
 #pragma once 
 
